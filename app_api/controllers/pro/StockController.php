@@ -1,7 +1,7 @@
 <?php
-namespace api\controllers;
+namespace api\controllers\pro;
 
-use common\models\stock\Basic;
+use api\controllers\BaseController;
 use common\models\stock\ProBasic;
 use strong\helpers\PageHelper;
 
@@ -14,7 +14,7 @@ use strong\helpers\PageHelper;
 class StockController extends BaseController
 {
     /**
-     *
+     * 股票基本信息列表
      *
      * @return array
      */
@@ -22,13 +22,13 @@ class StockController extends BaseController
     {
         list($page, $pageSize) = PageHelper::getPageParams();
 
-        $total = Basic::find()->count();
+        $total = (int)ProBasic::find()->count();
 
         if($total){
 
             list($offset, $limit) = PageHelper::getOffsetAndLimit();
 
-            $data = Basic::find()->offset($offset)->limit($limit)->asArray()->all();
+            $data = ProBasic::find()->offset($offset)->limit($limit)->asArray()->all();
         }else{
             $data = [];
         }
